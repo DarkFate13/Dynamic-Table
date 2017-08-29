@@ -14,6 +14,8 @@ void test_insert(long int size, float factor) {
 		clock_gettime(CLOCK_REALTIME, &requestEnd);
 		printf("%f ", accum_time(requestStart, requestEnd));
 	}
+	
+	free (Table);
 }
 
 void test_delete(long int size, float factor) {
@@ -33,18 +35,47 @@ void test_delete(long int size, float factor) {
 		remove_element(Table);
 		clock_gettime(CLOCK_REALTIME, &requestEnd);
 		printf("%f ", accum_time(requestStart, requestEnd));
-	}
+	
+    }
+    
+    free (Table);
 }
+
+#if 0
+void test_random(long int insert_times, long int delete_times) {
+    bool *arr = malloc(sizeof(bool)*(insert_times + delete_times));
+    arr = create_data(insert_times, delete_times);
+    
+    long int i = 0;
+    
+    for(i = 0 ; i < (insert_times + delete_times); i++) {
+        if(arr[i]) {
+            push_back(Table, 5);
+        }
+        else {
+            
+        }
+    }
+    
+    free(arr);
+}
+#endif
 
 void run_tests(char** args, int no_of_args) {
 	int i = 0;
 	if(!strcmp(args[0], "-i")) {
-		test_insert((long int )atoi(args[1]), atof(args[2]));
+		test_insert(atol(args[1]), atof(args[2]));
 	}
 
 	if(!strcmp(args[0], "-d")) {
-		test_delete((long int )atoi(args[1]), atof(args[2]));
+		test_delete(atol(args[1]), atof(args[2]));
 	}
+	
+#if 0
+	if(!strcmp(args[0], "-r")) {
+        test_random(atol(args[1]), atol(args[1]));
+    }
+#endif
 }
 
 int main(int argl, char** argv) {
@@ -77,8 +108,9 @@ int main(int argl, char** argv) {
 	arr = create_data(40000, 60000);
     long int i;
     for(i = 0; i < 40000 + 60000; i++) {
-        printf("%d ", arr[i]);
+        //printf("%d ", arr[i]);
     }
+    free(arr);
 #endif
 	
 	run_tests(argv + 1, argl - 1);

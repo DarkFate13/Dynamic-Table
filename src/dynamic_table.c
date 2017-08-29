@@ -1,16 +1,19 @@
 #include "../include/dynamic_table.h"
 
 // typedef struct DynamicTable {
-	// size_t size_;
-	// size_t capacity_;
-	// int factor_;
-	// int *arr_;
+	
+// 	long int size_;
+// 	long int  capacity_;
+// 	float factor_;
+// 	int *arr_;
+	
 // }DynamicTable;
 
-// DynamicTable *init(size_t size = 0, size_t capacity = 100, int factor_ = 2);
-// bool push_back(DynamicTable *Table, int value);
-// bool remove(DynamicTable *Table);
-// void resize_(DynamicTable *Table, int factor);
+// DynamicTable *init(long int  capacity, float factor_);
+// void push_back(DynamicTable *Table, int value);
+// void remove_element(DynamicTable *Table);
+// void resize_(DynamicTable *Table, int amount);
+// void delete_table(DynamicTable *Table);
 
 DynamicTable *init(long int capacity, float factor) {
 	DynamicTable *Table = malloc(sizeof(DynamicTable));
@@ -30,21 +33,25 @@ DynamicTable *init(long int capacity, float factor) {
 }
 
 void push_back(DynamicTable *Table, int value) {
+
+	// Create extra space if full
 	if(Table->size_ == Table->capacity_ - 1) {
 		resize_(Table, (Table->capacity_*Table->factor_));
 	}
 	
+	// Push element
 	Table->arr_[Table->size_] = value;
 	++Table->size_;
 }
 
 void remove_element(DynamicTable *Table) {
-	if(Table->size_ == 0) {
+	if(Table->size_ == 0) { // Check for no elements
 		return;
 	}
 	
-	Table->size_--;
+	Table->size_--; //Pop last element
 	
+	// Resize if ratio of capacity to size exceeds the factor
 	if(Table->capacity_/Table->size_ > Table->factor_ && Table->capacity_ > 100) {
 		resize_(Table, Table->capacity_/Table->factor_);
 	}

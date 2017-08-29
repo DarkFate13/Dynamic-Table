@@ -24,11 +24,12 @@ bool *create_data(long int insert_times, long int delete_times) {
         arr[i] = 0;
     }
     
-    return randomize(arr, (insert_times + delete_times));
+    randomize(arr, (insert_times + delete_times));
+    return arr;
     
 }
 
-bool *randomize (bool arr[], long int n) {
+void randomize (bool arr[], long int n) {
     // Use a different seed value so that we don't get same
     // result each time we run this program
     srand (time(NULL));
@@ -43,5 +44,5 @@ bool *randomize (bool arr[], long int n) {
         swap(&arr[i], &arr[j]);
     }
     
-    return arr;
+    return;
 }
