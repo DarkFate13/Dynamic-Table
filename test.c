@@ -1,5 +1,6 @@
 #include "include/dynamic_table.h"
 #include "include/get_time.h"
+#include "include/utils.h"
 #include <string.h>
 
 void test_insert(long int size, float factor) {
@@ -49,7 +50,7 @@ void run_tests(char** args, int no_of_args) {
 int main(int argl, char** argv) {
 	// run_tests(argv + 1, argl - 1);
 	
-	#if 0
+#if 0
 	int i;
 	
 	DynamicTable *Table = init((size_t)0, (size_t)100, 1.25);
@@ -69,7 +70,16 @@ int main(int argl, char** argv) {
 	
 	delete_table(Table);
 	
-	#endif
+#endif
+	
+#if 0
+    bool *arr = malloc(sizeof(bool)*(40000 + 60000));
+	arr = create_data(40000, 60000);
+    long int i;
+    for(i = 0; i < 40000 + 60000; i++) {
+        printf("%d ", arr[i]);
+    }
+#endif
 	
 	run_tests(argv + 1, argl - 1);
 	
