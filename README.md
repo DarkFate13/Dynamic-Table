@@ -37,7 +37,9 @@ OPTIONS:
         get times for one million insertions.
     -d [INIT_SIZE] [FACTOR]
         get times for one million deletions.
-        
+    -r [INIT_SIZE] [FACTOR] [INSERT_TIMES] [DELETE_TIMES]
+        get times for opertions: INSERT_TIMES insertions and DELETE_TIMES deletions
+    
 ```
 
 ## Deployment

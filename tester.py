@@ -78,7 +78,17 @@ if __name__ == "__main__":
     plt.show()
     plt.clf()
 	
+    plt.xlabel('Operation Number')
+    plt.ylabel('Time')
+    plt.title('RATIO 4:2')
     
+    print("RATIO 4:2")
+    for f in factors:
+        test_ratio(f, 4000000, 2000000);
+    plt.legend(loc="upper left")
+    plt.show()
+    plt.clf()
+
 '''
 INSERT
 Maximium: 4.075924
@@ -103,4 +113,13 @@ Maximium: 15.768057
 Maximium: 9.623128
 Maximium: 12.935813
 Maximium: 8.200089
+'''
+
+'''
+RATIO 4:2
+Maximium: 14.97553
+Maximium: 15.672075
+Maximium: 9.948075
+Maximium: 13.429908
+Maximium: 8.140377
 '''
