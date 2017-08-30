@@ -16,7 +16,7 @@ def test_insert(factor):
     print('Maximium: ' + str(max(times)))
 
     plt.plot(range(len(times)), list(accumulate(times)), label=str(factor))
-    #plt.title('Insert with Factor: ' + str(factor))
+    
     
 def test_delete(factor):
     p = subprocess.Popen(['./test', '-d', '100', str(factor)], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -25,8 +25,7 @@ def test_delete(factor):
     times = list(map(float, out.split()))
 
     print('Maximium: ' + str(max(times)))
-    #print(times)
-
+    
     plt.plot(range(len(times)), list(accumulate(times)), label=str(factor))
     
 def test_ratio(factor, t1, t2):
@@ -36,8 +35,7 @@ def test_ratio(factor, t1, t2):
     times = list(map(float, out.split()))
 
     print('Maximium: ' + str(max(times)))
-    #print(times)
-
+    
     plt.plot(range(len(times)), list(accumulate(times)), label=str(factor))
 
 if __name__ == "__main__":
@@ -88,38 +86,3 @@ if __name__ == "__main__":
     plt.legend(loc="upper left")
     plt.show()
     plt.clf()
-
-'''
-INSERT
-Maximium: 4.075924
-Maximium: 3.221704
-Maximium: 3.661241
-Maximium: 3.674268
-Maximium: 3.215994
-'''
-'''
-DELETE
-Maximium: 0.052824
-Maximium: 0.502145
-Maximium: 0.177969
-Maximium: 0.062437
-Maximium: 0.065113
-'''
-
-'''
-RATIO 4:3
-Maximium: 15.438233
-Maximium: 15.768057
-Maximium: 9.623128
-Maximium: 12.935813
-Maximium: 8.200089
-'''
-
-'''
-RATIO 4:2
-Maximium: 14.97553
-Maximium: 15.672075
-Maximium: 9.948075
-Maximium: 13.429908
-Maximium: 8.140377
-'''
