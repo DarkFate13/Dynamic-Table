@@ -29,6 +29,17 @@ def test_delete(factor):
 
     plt.plot(range(len(times)), list(accumulate(times)), label=str(factor))
     
+def test_ratio(factor, t1, t2):
+    p = subprocess.Popen(['./test', '-r', '100', str(factor), str(t1), str(t2)], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    out, err = p.communicate()
+
+    times = list(map(float, out.split()))
+
+    print('Maximium: ' + str(max(times)))
+    #print(times)
+
+    plt.plot(range(len(times)), list(accumulate(times)), label=str(factor))
+
 if __name__ == "__main__":
     
 
@@ -55,6 +66,18 @@ if __name__ == "__main__":
     plt.legend(loc="upper left")
     plt.show()
     plt.clf()
+
+    plt.xlabel('Operation Number')
+    plt.ylabel('Time')
+    plt.title('RATIO 4:3')
+    
+    print("RATIO 4:3")
+    for f in factors:
+        test_ratio(f, 4000000, 3000000);
+    plt.legend(loc="upper left")
+    plt.show()
+    plt.clf()
+	
     
 '''
 INSERT
@@ -71,4 +94,13 @@ Maximium: 0.502145
 Maximium: 0.177969
 Maximium: 0.062437
 Maximium: 0.065113
+'''
+
+'''
+RATIO 4:3
+Maximium: 15.438233
+Maximium: 15.768057
+Maximium: 9.623128
+Maximium: 12.935813
+Maximium: 8.200089
 '''

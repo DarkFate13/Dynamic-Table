@@ -41,28 +41,38 @@ void test_delete(long int size, float factor) {
     free (Table);
 }
 
-#if 0
-void test_random(long int insert_times, long int delete_times) {
-    bool *arr = malloc(sizeof(bool)*(insert_times + delete_times));
-    arr = create_data(insert_times, delete_times);
+void test_ratio(long int size, float factor,long int insert_times, long int delete_times) {
+	
+	struct timespec requestStart, requestEnd;
+	DynamicTable *Table = init(size, factor);
     
+    if(delete_times > insert_times) {
+    	swap(&delete_times, &insert_times);
+    }
+
     long int i = 0;
     
-    for(i = 0 ; i < (insert_times + delete_times); i++) {
-        if(arr[i]) {
-            push_back(Table, 5);
-        }
-        else {
-            
-        }
+    for(i = 0 ; i < insert_times; i++) {
+    	clock_gettime(CLOCK_REALTIME, &requestStart);
+		push_back(Table, 5);
+		clock_gettime(CLOCK_REALTIME, &requestEnd);
+		printf("%f ", accum_time(requestStart, requestEnd));   
     }
+
+    for(i = 0; i < delete_times; i++) {
+		clock_gettime(CLOCK_REALTIME, &requestStart);
+		remove_element(Table);
+		clock_gettime(CLOCK_REALTIME, &requestEnd);
+		printf("%f ", accum_time(requestStart, requestEnd));
+	
+    }
+    // printf("%ld %ld %ld %f", size, insert_times, delete_times, factor);
     
-    free(arr);
+    free(Table);
 }
-#endif
 
 void run_tests(char** args, int no_of_args) {
-	int i = 0;
+	int i = 0; 
 	if(!strcmp(args[0], "-i")) {
 		test_insert(atol(args[1]), atof(args[2]));
 	}
@@ -71,11 +81,10 @@ void run_tests(char** args, int no_of_args) {
 		test_delete(atol(args[1]), atof(args[2]));
 	}
 	
-#if 0
 	if(!strcmp(args[0], "-r")) {
-        test_random(atol(args[1]), atol(args[1]));
+        test_ratio(atol(args[1]), atof(args[2]), atol(args[3]), atol(args[4]));
     }
-#endif
+
 }
 
 int main(int argl, char** argv) {
